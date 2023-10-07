@@ -1,0 +1,33 @@
+﻿<TextBox x:Class="SecureLibrary.Controls.ExtendedTextBox"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+         xmlns:local="clr-namespace:SecureLibrary.Controls"
+         xmlns:ext="clr-namespace:SecureLibrary.Utilities.MarkupExtensions"
+         mc:Ignorable="d" 
+         d:DesignHeight="450" d:DesignWidth="800">
+    <TextBox.Template>
+        <ControlTemplate TargetType="local:ExtendedTextBox">
+            <Border Name="Border"
+                    Grid.Row="1"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    Background="{TemplateBinding Background}">
+                <ScrollViewer Margin="0" x:Name="PART_ContentHost">
+                    <ScrollViewer.LayoutTransform>
+                        <ScaleTransform ScaleX="{Binding Zoom, RelativeSource={RelativeSource TemplatedParent}}"
+                                        ScaleY="{Binding Zoom, RelativeSource={RelativeSource TemplatedParent}}"/>
+                    </ScrollViewer.LayoutTransform>
+                </ScrollViewer>
+            </Border>
+        </ControlTemplate>
+    </TextBox.Template>
+
+    <TextBox.InputBindings>
+        <MouseBinding Gesture="{ext:MouseWheel Direction=Up, Modifier=Ctrl}"
+                      Command="{ext:CommandFactory Handler=OnCtrlWheelUp}"/>
+        <MouseBinding Gesture="{ext:MouseWheel Direction=Down, Modifier=Ctrl}"
+                      Command="{ext:CommandFactory Handler=OnCtrlWheelDown}"/>
+    </TextBox.InputBindings>
+</TextBox>

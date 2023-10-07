@@ -1,0 +1,284 @@
+﻿<Application x:Class="SecureLibrary.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:SecureLibrary"
+             xmlns:wins="clr-namespace:SecureLibrary.Windows"
+             xmlns:ctrl="clr-namespace:SecureLibrary.Controls"
+             xmlns:md="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF"
+             Startup="Application_Startup">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Assets/ContextMenuStyles.xaml"/>
+                <ResourceDictionary Source="Assets/ScrollBarStyles.xaml"/>
+                <ResourceDictionary Source="Assets/ComboBoxStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            
+            <SolidColorBrush x:Key="BackgroundBrush" Color="{DynamicResource BackgroundColor}"/>
+            <SolidColorBrush x:Key="BackgroundControlBrush" Color="{DynamicResource BackgroundControlColor}"/>
+            <SolidColorBrush x:Key="BackgroundUpperControlBrush" Color="{DynamicResource BackgroundUpperControlColor}"/>
+            <SolidColorBrush x:Key="BorderBrush" Color="{DynamicResource BorderColor}"/>
+            <SolidColorBrush x:Key="HoverBrush" Color="{DynamicResource BorderColor}"/>
+            <SolidColorBrush x:Key="PressBrush" Color="{DynamicResource PressColor}"/>
+            <SolidColorBrush x:Key="TextBrush" Color="{DynamicResource TextColor}"/>
+
+            <Color x:Key="BackgroundColor">#1F1F1F</Color>
+            <Color x:Key="BackgroundControlColor">#252526</Color>
+            <Color x:Key="BackgroundUpperControlColor">#2E2E2E</Color>
+            <Color x:Key="BorderColor">#3F3F46</Color>
+            <Color x:Key="HoverColor">#3D3D3D</Color>
+            <Color x:Key="PressColor">#6DD9FF</Color>
+            <Color x:Key="TextColor">#E6E6E6</Color>
+
+            <Style x:Key="RoundedCorners">
+                <Style.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </Style.Resources>
+            </Style>
+
+            <Style TargetType="Window">
+                <Setter Property="Icon" Value="icon.ico"/>
+                <Setter Property="Background" Value="{DynamicResource BackgroundBrush}"/>
+            </Style>
+
+            <Style TargetType="wins:MainWindow" BasedOn="{StaticResource {x:Type Window}}"/>
+            <Style TargetType="wins:IconDialog" BasedOn="{StaticResource {x:Type Window}}"/>
+            <Style TargetType="wins:ColorDialog" BasedOn="{StaticResource {x:Type Window}}"/>
+
+            <Style TargetType="Paragraph">
+                <Setter Property="Margin" Value="0"/>
+                <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+            </Style>
+        
+            <Style TargetType="GridSplitter">
+                <Setter Property="Background" Value="Transparent"/>
+            </Style>
+
+            <Style TargetType="Label">
+                <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+            </Style>
+
+            <Style TargetType="Button" BasedOn="{StaticResource RoundedCorners}">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+                <Setter Property="BorderThickness" Value="0"/>
+
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}">
+                                <ContentPresenter Content="{TemplateBinding Content}" 
+                                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                                    Margin="{TemplateBinding Padding}" />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="{DynamicResource HoverBrush}" />
+                    </Trigger>
+
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter Property="Background" Value="{DynamicResource PressBrush}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style TargetType="TextBox" BasedOn="{StaticResource RoundedCorners}">
+                <Setter Property="Background" Value="{DynamicResource BackgroundControlBrush}"/>
+                <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+                <Setter Property="SelectionBrush" Value="{DynamicResource PressBrush}"/>
+                <Setter Property="SelectionTextBrush" Value="{DynamicResource HoverBrush}"/>
+                <Setter Property="BorderThickness" Value="0"/>
+            </Style>
+
+            <Style TargetType="PasswordBox" BasedOn="{StaticResource RoundedCorners}">
+                <Setter Property="Background" Value="{DynamicResource BackgroundControlBrush}"/>
+                <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+                <Setter Property="SelectionBrush" Value="{DynamicResource PressBrush}"/>
+                <Setter Property="SelectionTextBrush" Value="{DynamicResource HoverBrush}"/>
+                <Setter Property="BorderThickness" Value="0"/>
+            </Style>
+
+            <Style TargetType="RichTextBox" BasedOn="{StaticResource RoundedCorners}">
+                <Setter Property="Background" Value="{DynamicResource BackgroundControlBrush}"/>
+                <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+                <Setter Property="SelectionTextBrush" Value="{DynamicResource HoverBrush}"/>
+                <Setter Property="BorderThickness" Value="0"/>
+            </Style>
+
+            <Style TargetType="ctrl:ExtendedTextBox" BasedOn="{StaticResource {x:Type TextBox}}"/>
+            <Style TargetType="ctrl:RichTextEditor" BasedOn="{StaticResource {x:Type RichTextBox}}"/>
+
+            <Style TargetType="TabControl">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="0"/>
+            </Style>
+
+            <Style TargetType="TabItem" BasedOn="{StaticResource RoundedCorners}">
+                <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="TabItem">
+                            <Grid>
+                                <Border Name="Border" 
+                                        Margin="0,0,4,4" 
+                                        BorderThickness="0" 
+                                        Background="{DynamicResource BackgroundControlBrush}">
+                                    <ContentPresenter VerticalAlignment="Center" 
+                                                       HorizontalAlignment="Center" 
+                                                       ContentSource="Header" 
+                                                       Margin="2,2,2,2" 
+                                                       RecognizesAccessKey="True"/>
+                                </Border>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Panel.ZIndex" Value="100" />
+                                    <Setter TargetName="Border" 
+                                            Property="BorderBrush" 
+                                            Value="{DynamicResource PressBrush}"/>
+                                    <Setter TargetName="Border" 
+                                            Property="BorderThickness" 
+                                            Value="0,0,0,2"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style TargetType="TreeView" BasedOn="{StaticResource RoundedCorners}">
+                <Setter Property="Background" Value="{DynamicResource BackgroundControlBrush}"/>
+                <Setter Property="BorderThickness" Value="0"/>
+
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="TreeView">
+                            <Border Background="{TemplateBinding Background}"
+                                    BorderThickness="{TemplateBinding BorderThickness}">
+                                <ScrollViewer Focusable="False"
+                                              CanContentScroll="False"
+                                              Padding="0,4,0,4">
+                                    <ItemsPresenter/>
+                                </ScrollViewer>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style TargetType="TreeViewItem" BasedOn="{StaticResource RoundedCorners}">
+                <Setter Property="BorderThickness" Value="1.5"/>
+                <Setter Property="Background" Value="Transparent"/>
+
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="BorderBrush" Value="{DynamicResource PressBrush}"/>
+                    </Trigger>
+                </Style.Triggers>
+                <Style.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"
+                                        Color="Transparent"/>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}"
+                                        Color="Transparent"/>
+                </Style.Resources>
+            </Style>
+
+            <Style TargetType="ListBox" BasedOn="{StaticResource RoundedCorners}">
+                <Setter Property="Background" Value="{DynamicResource BackgroundControlBrush}"/>
+                <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+                <Setter Property="BorderThickness" Value="0"/>
+            </Style>
+
+            <!-- _____________________
+                 _____________________
+                 _____________________ -->
+
+            <Style x:Key="SliderRepeatButton" TargetType="RepeatButton">
+                <Setter Property="SnapsToDevicePixels" Value="true" />
+                <Setter Property="OverridesDefaultStyle" Value="true" />
+                <Setter Property="IsTabStop" Value="false" />
+                <Setter Property="Focusable" Value="false" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="RepeatButton">
+                            <Border Background="{DynamicResource BackgroundControlBrush}"
+                                    Height="3"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="SliderRepeatButton1" TargetType="RepeatButton">
+                <Setter Property="SnapsToDevicePixels" Value="true" />
+                <Setter Property="OverridesDefaultStyle" Value="true" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="RepeatButton">
+                            <Border SnapsToDevicePixels="True"
+                                    Background="{DynamicResource BackgroundUpperControlBrush}"
+                                    Height="3"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="SliderThumb" TargetType="Thumb">
+                <Setter Property="SnapsToDevicePixels" Value="true" />
+                <Setter Property="OverridesDefaultStyle" Value="true" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Thumb">
+                            <Ellipse Height="10"
+                                     Width="10"
+                                     Fill="{DynamicResource HoverBrush}"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <ControlTemplate x:Key="SliderTemplate"  TargetType="Slider">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Track Grid.Row="1" x:Name="PART_Track"   >
+                        <Track.DecreaseRepeatButton>
+                            <RepeatButton Style="{StaticResource SliderRepeatButton1}"
+                                          Command="Slider.DecreaseLarge" />
+                        </Track.DecreaseRepeatButton>
+                        <Track.Thumb>
+                            <Thumb Style="{StaticResource SliderThumb}"  />
+                        </Track.Thumb>
+                        <Track.IncreaseRepeatButton>
+                            <RepeatButton Style="{StaticResource SliderRepeatButton}"
+                                          Command="Slider.IncreaseLarge" />
+                        </Track.IncreaseRepeatButton>
+                    </Track>
+                </Grid>
+            </ControlTemplate>
+
+            <Style TargetType="Slider">
+                <Setter Property="Focusable" Value="False"/>
+                <Setter Property="SnapsToDevicePixels" Value="true" />
+                <Setter Property="OverridesDefaultStyle" Value="true" />
+                <Style.Triggers>
+                    <Trigger Property="Orientation" Value="Horizontal">
+                        <Setter Property="MinHeight" Value="21" />
+                        <Setter Property="MinWidth" Value="104" />
+                        <Setter Property="Template"
+                                Value="{StaticResource SliderTemplate}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

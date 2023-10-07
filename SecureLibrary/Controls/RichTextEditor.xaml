@@ -1,0 +1,114 @@
+﻿<RichTextBox x:Class="SecureLibrary.Controls.RichTextEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:md="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF"
+             xmlns:local="clr-namespace:SecureLibrary.Controls"
+             xmlns:ext="clr-namespace:SecureLibrary.Utilities.MarkupExtensions"
+             xmlns:conv="clr-namespace:SecureLibrary.Utilities.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" x:Name="This">
+    <RichTextBox.Template>
+        <ControlTemplate TargetType="local:RichTextEditor">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <DockPanel>
+                    <ComboBox ItemsSource="{x:Static Fonts.SystemFontFamilies}"
+                              Width="120"
+                              SelectedItem="{Binding CurrentFontFamily, RelativeSource={RelativeSource TemplatedParent}}"/>
+                    <TextBox Width="40"
+                             Text="{Binding CurrentFontSize, RelativeSource={RelativeSource TemplatedParent},
+                                    Converter={conv:DoubleToStringConverter Mininum=0.75, Maximum=1000}}"/>
+                    <Button Command="{ext:CommandFactory Handler=IncreaseFontSizeWrapper}"
+                            Content="{md:MaterialIconExt Kind=FormatFontSizeIncrease, Size=16}"
+                            ToolTip="Increase font size (Ctrl+[)"/>
+                    <Button Command="{ext:CommandFactory Handler=DecreaseFontSizeWrapper}"
+                            Content="{md:MaterialIconExt Kind=FormatFontSizeDecrease, Size=16}"
+                            ToolTip="Decrease font size (Ctrl+])"/>
+                    <Separator/>
+                    <Button Command="EditingCommands.ToggleBold"
+                            Content="{md:MaterialIconExt Kind=FormatBold, Size=16}"
+                            ToolTip="Toggle bold (Ctrl+B)"/>
+                    <Button Command="EditingCommands.ToggleItalic"
+                            Content="{md:MaterialIconExt Kind=FormatItalic, Size=16}"
+                            ToolTip="Toggle italic (Ctrl+B)"/>
+                    <Button Command="EditingCommands.ToggleUnderline"
+                            Content="{md:MaterialIconExt Kind=FormatUnderline, Size=16}"
+                            ToolTip="Toggle underline (Ctrl+U)"/>
+                    <Button Command="EditingCommands.ToggleSubscript"
+                            Content="{md:MaterialIconExt Kind=FormatSubscript, Size=16}"
+                            ToolTip="Toggle subscript (Ctrl+Plus)"/>
+                    <Button Command="EditingCommands.ToggleSuperscript"
+                            Content="{md:MaterialIconExt Kind=FormatSuperscript, Size=16}"
+                            ToolTip="Toggle superscript (Ctrl+Shift+Plus)"/>
+                    <Separator/>
+                    <Button Command="EditingCommands.ToggleNumbering"
+                            Content="{md:MaterialIconExt Kind=FormatListNumbered, Size=16}"
+                            ToolTip="Toggle numbering (Ctrl+Shift+N)"/>
+                    <Button Command="EditingCommands.ToggleBullets"
+                            Content="{md:MaterialIconExt Kind=FormatListBulleted, Size=16}"
+                            ToolTip="Toggle numbering (Ctrl+Shift+N)"/>
+                    <Separator/>
+                    <Button Command="EditingCommands.AlignLeft"
+                            Content="{md:MaterialIconExt Kind=FormatAlignLeft, Size=16}"
+                            ToolTip="Align left (Ctrl+L)"/>
+                    <Button Command="EditingCommands.AlignCenter"
+                            Content="{md:MaterialIconExt Kind=FormatAlignCenter, Size=16}"
+                            ToolTip="Align center (Ctrl+E)"/>
+                    <Button Command="EditingCommands.AlignRight"
+                            Content="{md:MaterialIconExt Kind=FormatAlignRight, Size=16}"
+                            ToolTip="Align right (Ctrl+R)"/>
+                    <Button Command="EditingCommands.AlignJustify"
+                            Content="{md:MaterialIconExt Kind=FormatAlignJustify, Size=16}"
+                            ToolTip="Align justify (Ctrl+J)"/>
+                    <Control/>
+
+                    <DockPanel.Resources>
+                        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                            <Setter Property="Margin" Value="2"/>
+                            <Setter Property="Width" Value="20"/>
+                            <Setter Property="Height" Value="20"/>
+                        </Style>
+                        <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                            <Setter Property="Margin" Value="2"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                        </Style>
+                        <Style TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
+                            <Setter Property="Margin" Value="2"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                        </Style>
+                        <Style TargetType="Separator" BasedOn="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
+                    </DockPanel.Resources>
+                </DockPanel>
+                <Border Name="Border"
+                        Grid.Row="1"
+                        Margin="0,4,0,0"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        Background="{TemplateBinding Background}">
+                    <ScrollViewer Margin="0" x:Name="PART_ContentHost">
+                        <ScrollViewer.LayoutTransform>
+                            <ScaleTransform ScaleX="{Binding Zoom, RelativeSource={RelativeSource TemplatedParent}}"
+                                            ScaleY="{Binding Zoom, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        </ScrollViewer.LayoutTransform>
+                    </ScrollViewer>
+                </Border>
+            </Grid>
+        </ControlTemplate>
+    </RichTextBox.Template>
+    <RichTextBox.InputBindings>
+        <MouseBinding Gesture="{ext:MouseWheel Direction=Up, Modifier=Ctrl}"
+                      Command="{ext:CommandFactory Handler=OnCtrlWheelUp}"/>
+        <MouseBinding Gesture="{ext:MouseWheel Direction=Down, Modifier=Ctrl}"
+                      Command="{ext:CommandFactory Handler=OnCtrlWheelDown}"/>
+        <KeyBinding Key="OemOpenBrackets" Modifiers="Ctrl"
+                    Command="{ext:CommandFactory Handler=DecreaseFontSizeWrapper}"/>
+        <KeyBinding Key="OemCloseBrackets" Modifiers="Ctrl"
+                    Command="{ext:CommandFactory Handler=IncreaseFontSizeWrapper}"/>
+    </RichTextBox.InputBindings>
+</RichTextBox>

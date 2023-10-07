@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Debug plugin": {
+      "commandName": "Executable",
+      "executablePath": "$(SolutionDir)\\SecureLibrary\\bin\\$(Configuration)\\net6.0-windows\\SecureLibrary.exe",
+      "commandLineArgs": "-p \"$(TargetPath)\""
+    }
+  }
+}
