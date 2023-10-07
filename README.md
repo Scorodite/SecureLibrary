@@ -18,6 +18,7 @@ Tool for storing hierarchical information in private way (encrypted and/or hidde
 
 ### Main window
 ![Screenshot](Screenshots/3.png)
+
 - Top menu
 
 	Contains New, Load and Save buttons.
@@ -33,6 +34,7 @@ Tool for storing hierarchical information in private way (encrypted and/or hidde
 
 ### New/Load/Save context menu
 ![Screenshot](Screenshots/4.png)
+
 Can be opened by left-clicking New or Load buttons, or right clicking Save button if library is open.
 First you pick the container type for library. Available container types:
 - File
@@ -55,6 +57,7 @@ Then you choose how to modify the library's binary data when saved to the contai
 
 ### Tree context menu
 ![Screenshot](Screenshots/8.png)
+
 Can be opened by right-clicking library tree view. Creates new library item at current root item. Available item types:
 - Empty
 	
@@ -68,6 +71,7 @@ Can be opened by right-clicking library tree view. Creates new library item at c
 
 ### Item context menu
 ![Screenshot](Screenshots/5.png)
+
 Can be opened by right-clicking library item in tree view.
 - Add
 - Rename
@@ -90,10 +94,12 @@ Can be opened by right-clicking library item in tree view.
 
 ### Icon picker
 ![Screenshot](Screenshots/6.png)
+
 It has a filter field, a color selection button and a list with filtered icons.
 
 ### Color picker
 ![Screenshot](Screenshots/7.png)
+
 Has three sliders for red, green and blue channels and field with color hexadecimal value.
 
 ## Plugins
