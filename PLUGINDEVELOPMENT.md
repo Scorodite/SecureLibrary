@@ -41,8 +41,13 @@ Property with collection of MainWindow top menu buttons.
 3. Add SecureLibrary as project reference in dependencies
 4. Set plugin as startup project
 5. Open debug properties menu
+
 	![Screenshot](Screenshots/9.png)
-6. Create executable profile, select `[Executable path]\SecureLibrary.exe` as `Executable` and enter `-p "$(TargetPath)"` in `Command line arguments` 
+
+7. Create executable profile, select `[Executable path]\SecureLibrary.exe` as `Executable` and enter `-p "$(TargetPath)"` in `Command line arguments` 
+
 	![Screenshot](Screenshots/10.png)
+
 	- If you added SecureLibrary project in solution, you can enter `[Solution path]\SecureLibrary\bin\$(Configuration)\net6.0-windows\SecureLibrary.exe` in `Executable` to run SecureLibrary in different configurations
+
 		![Screenshot](Screenshots/11.png)
