@@ -11,7 +11,7 @@ namespace SecureLibrary.Core.Features.LibraryItems
 
         public override LibraryItem? Create()
         {
-            return App.InputBox("Enter name") is string name ? new(name) : null;
+            return App.InputBox("Enter name") is string name ? new(name, 1) : null;
         }
     }
 }

@@ -33,9 +33,10 @@ namespace SecureLibrary.Core
             IsModified = true;
         }
 
-        public LibraryItem(string name) : this()
+        public LibraryItem(string name, float sortWeight) : this()
         {
             _Name = name;
+            _SortWeight = sortWeight;
         }
 
         public string Name { get => _Name; set => SetName(value); }
@@ -191,7 +192,7 @@ namespace SecureLibrary.Core
                     1 :
                     SortWeight == other.SortWeight ?
                         Name.CompareTo(other.Name) :
-                        SortWeight.CompareTo(other.SortWeight);
+                        -SortWeight.CompareTo(other.SortWeight);
         }
 
         #endregion

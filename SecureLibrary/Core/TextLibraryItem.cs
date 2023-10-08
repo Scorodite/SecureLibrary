@@ -25,7 +25,6 @@ namespace SecureLibrary.Core.Custom
             _UI = new(CreateUI);
             _Text = string.Empty;
             Icon = MaterialIconKind.File;
-            SortWeight = 1;
 
             Actions.Add(new("To rich", MaterialIconKind.FileText, ToRich_Clicked));
         }
