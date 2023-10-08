@@ -11,6 +11,13 @@ namespace SecureLibrary.Core
 {
     public class PluginCollection : ObservableCollection<Plugin>
     {
+        public PluginCollection()
+        {
+            Libraries = new();
+        }
+
+        public ObservableCollection<Assembly> Libraries { get; }
+
         public IEnumerable<Assembly> Assemblies => this.Select(i => i.Assembly);
 
         public void LoadLibraries(string directory)
@@ -25,7 +32,9 @@ namespace SecureLibrary.Core
         {
             try
             {
-                return Assembly.LoadFile(dll);
+                Assembly libraries = Assembly.LoadFrom(dll);
+                Libraries.Add(libraries);
+                return libraries;
             }
             catch (Exception ex)
             {
@@ -47,7 +56,7 @@ namespace SecureLibrary.Core
         {
             try
             {
-                Plugin plugin = new(Path.GetFileName(dll), Assembly.LoadFile(dll));
+                Plugin plugin = new(Path.GetFileName(dll), Assembly.LoadFrom(dll));
                 Add(plugin);
                 return plugin;
             }
