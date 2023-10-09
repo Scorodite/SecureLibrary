@@ -1,7 +1,7 @@
 ﻿using Material.Icons;
 using SecureLibrary.Core.Storage.Methods;
 
-namespace SecureLibrary.Core.Features.Storage.Modifiers
+namespace SecureLibrary.Core.Features.Storage.Methods
 {
     [RegisterFeature]
     public class DirectStorageMethodFactory : StorageMethodFactory

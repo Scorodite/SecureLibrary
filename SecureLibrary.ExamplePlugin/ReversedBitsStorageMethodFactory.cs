@@ -1,7 +1,7 @@
 ﻿using Material.Icons;
 using SecureLibrary.Core.Features;
 using SecureLibrary.Core.Features.Storage;
-using SecureLibrary.Core.Features.Storage.Modifiers;
+using SecureLibrary.Core.Features.Storage.Methods;
 using SecureLibrary.Core.Storage.Methods;
 
 namespace SecureLibrary.ExamplePlugin

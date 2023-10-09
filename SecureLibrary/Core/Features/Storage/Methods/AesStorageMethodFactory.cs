@@ -3,7 +3,7 @@ using SecureLibrary.Core.Storage;
 using SecureLibrary.Core.Storage.Methods;
 using System.Windows;
 
-namespace SecureLibrary.Core.Features.Storage.Modifiers
+namespace SecureLibrary.Core.Features.Storage.Methods
 {
     [RegisterFeature]
     public class AesStorageMethodFactory : StorageMethodFactory

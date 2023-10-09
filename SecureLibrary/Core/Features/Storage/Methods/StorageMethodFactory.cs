@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SecureLibrary.Core.Features.Storage.Modifiers
+namespace SecureLibrary.Core.Features.Storage.Methods
 {
     /// <summary>
     /// Base StorageMethod factory class that creates StorageMethod instances based on user input.

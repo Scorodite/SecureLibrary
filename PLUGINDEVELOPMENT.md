@@ -29,7 +29,7 @@ Enumeration of avariable contexts of BinaryStorage or StorageMethod creation: `N
 ### `SecureLibrary.Core.Features.Storage.BinaryStorageFactory`
 Creates containers based on user input using `BinaryStorageFactory.Create(StorageFactoryContext context)` method or based on command line arguments using `BinaryStorageFactory.CreateFromArgs(string[] args)`. All registered factories will be displayed in `New`, `Load` and `Save` context menu.
 
-### `SecureLibrary.Core.Features.Storage.Modifiers.StorageMethodFactory`
+### `SecureLibrary.Core.Features.Storage.Methods.StorageMethodFactory`
 Creates storage methods based on user input using `BinaryStorageFactory.Create(StorageFactoryContext context)` method or based on command line arguments using `BinaryStorageFactory.CreateFromArgs(string[] args)`. All registered factories will be displayed in `New`, `Load` and `Save` context menu.
 
 ### `SecureLibrary.Windows.MainWindow.MenuButtons`
