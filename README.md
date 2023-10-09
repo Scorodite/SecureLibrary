@@ -108,6 +108,7 @@ The program directory has the following structure:
 	- `libraries`
 - `SecureLibrary.exe`
 - `...`
+
 `plugins` directory contains Secure Library DLL plugins.
 `libraries` directory contains .NET DLL library files, necessary for plugins to work.
 
